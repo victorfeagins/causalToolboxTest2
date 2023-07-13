@@ -272,17 +272,16 @@ compute_sample_statistics <- function(mu_hat_0_MCMC_samples,
 
 # BART get pred matrix ---------------------------------------------------------
 
-get_BART_pred <- function(x.train, y.train, x.test, ndpost, ntree, nthread, 
+get_BART_pred <- function(x.train, y.train, x.test, ndpost, ntree, 
                           hyperparam) {
 
   pred_matrix <-
-    BART::mc.wbart(
+    BART::wbart(
       x.train = x.train,
       y.train = y.train,
       x.test = x.test,
       ndpost = ndpost,
       ntree = ntree,
-      mc.cores = nthread,
       sparse =    hyperparam$sparse,
       theta =     hyperparam$theta,
       omega =     hyperparam$omega,
