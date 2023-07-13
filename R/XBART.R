@@ -13,7 +13,6 @@ setClass(
     predmode = "character",
     ndpost = "numeric",
     ntree = "numeric",
-    nthread = "numeric",
     mu0.BART = "list", 
     mu1.BART = "list",
     tau0.BART = "list", 
@@ -38,7 +37,6 @@ X_BART <-
            tr,
            yobs,
            predmode = "pscore",
-           nthread = 1,
            ndpost = 1200,
            ntree = 200,
            mu.BART = list(
@@ -113,7 +111,6 @@ X_BART <-
       predmode = predmode,
       ndpost = ndpost,
       ntree = ntree,
-      nthread = nthread,
       mu0.BART = mu.BART, 
       mu1.BART = mu.BART,
       tau0.BART = tau.BART, 
@@ -179,7 +176,6 @@ setMethod(
                                      x.test = f_0_test_set, 
                                      ndpost = theObject@ndpost, 
                                      ntree = theObject@ntree, 
-                                     nthread = theObject@nthread, 
                                      hyperparam = theObject@mu0.BART)
 
 
@@ -189,8 +185,7 @@ setMethod(
                                       y.train = yobs_1, 
                                       x.test = f_1_test_set, 
                                       ndpost = theObject@ndpost, 
-                                      ntree = theObject@ntree, 
-                                      nthread = theObject@nthread, 
+                                      ntree = theObject@ntree,  
                                       hyperparam = theObject@mu1.BART)
 
     mu_hat_0 <- apply(pred_matrix_f_1[ ,1:n_0], 2, mean)
@@ -209,7 +204,6 @@ setMethod(
                                      x.test = feature_new, 
                                      ndpost = theObject@ndpost, 
                                      ntree = theObject@ntree, 
-                                     nthread = theObject@nthread, 
                                      hyperparam = theObject@tau1.BART)
 
     tau_hat_1 <- apply(pred_matrix_s_1, 2, mean)
@@ -218,8 +212,7 @@ setMethod(
                                       y.train = D_0, 
                                       x.test = feature_new, 
                                       ndpost = theObject@ndpost, 
-                                      ntree = theObject@ntree, 
-                                      nthread = theObject@nthread, 
+                                      ntree = theObject@ntree,  
                                       hyperparam = theObject@tau0.BART)
 
     tau_hat_0 <- apply(pred_matrix_s_0, 2, mean)
@@ -235,7 +228,6 @@ setMethod(
         x.test = feature_new,
         ndpost = theObject@ndpost,
         ntree = theObject@ntree,
-        nthread = theObject@nthread,
         hyperparam = theObject@e.BART
       )
       
